@@ -1,45 +1,71 @@
-document.getElementById("8gb-memory").addEventListener("click", function () {
+//memory function
+function updatedMemoryCost(memory) {
   const memoryInput = document.getElementById("memory-total");
-  memoryInput.innerText = parseInt(0);
+  if (memory == "8gb") {
+    memoryInput.innerText = 0;
+  } else if (memory == "16gb") {
+    memoryInput.innerText = 180;
+  }
+}
+
+//storage function
+function updatedStorageCost(storage) {
+  const storageInput = document.getElementById("storage-total");
+  if (storage == "256gb") {
+    storageInput.innerText = 0;
+  } else if (storage == "512gb") {
+    storageInput.innerText = 100;
+  } else if (storage == "1tb") {
+    storageInput.innerText = 180;
+  }
+}
+
+//delivery function
+function updatedDeliveryCost(delivery) {
+  const deliveryInput = document.getElementById("delivery-cost");
+  if (delivery == "free") {
+    deliveryInput.innerText = 0;
+  } else if (delivery == "charged") {
+    deliveryInput.innerText = 20;
+  }
+}
+
+//memory cost updated
+document.getElementById("8gb-memory").addEventListener("click", function () {
+  updatedMemoryCost("8gb");
   totalPrice();
 });
 
 document.getElementById("16gb-memory").addEventListener("click", function () {
-  const memoryInput = document.getElementById("memory-total");
-  memoryInput.innerText = parseInt(180);
+  updatedMemoryCost("16gb");
   totalPrice();
 });
 
-//storage memory events
+//storage cost updated
 document.getElementById("256gb-storage").addEventListener("click", function () {
-  const memoryInput = document.getElementById("storage-total");
-  memoryInput.innerText = parseInt(0);
+  updatedStorageCost("256gb");
   totalPrice();
 });
 
 document.getElementById("512gb-storage").addEventListener("click", function () {
-  const memoryInput = document.getElementById("storage-total");
-  memoryInput.innerText = parseInt(100);
+  updatedStorageCost("512gb");
   totalPrice();
 });
 document.getElementById("1tb-storage").addEventListener("click", function () {
-  const memoryInput = document.getElementById("storage-total");
-  memoryInput.innerText = parseInt(180);
+  updatedStorageCost("1tb");
   totalPrice();
 });
 
-//Delivery cost events
+//Delivery cost updated
 document.getElementById("free-delivery").addEventListener("click", function () {
-  const memoryInput = document.getElementById("delivery-cost");
-  memoryInput.innerText = parseInt(0);
+  updatedDeliveryCost("free");
   totalPrice();
 });
 
 document
   .getElementById("delivery-charge")
   .addEventListener("click", function () {
-    const memoryInput = document.getElementById("delivery-cost");
-    memoryInput.innerText = parseInt(20);
+    updatedDeliveryCost("charged");
     totalPrice();
   });
 
@@ -59,5 +85,21 @@ function totalPrice() {
   const totalAmountFooter = document.getElementById("footer-total");
   totalAmountFooter.innerText = total;
 }
+// promo code
+document.getElementById("promo-submit").addEventListener("click", function () {
+  const inputField = document.getElementById("promo-input");
+  const promoCode = inputField.value;
+  const totalPriceText = document.getElementById("footer-total");
+  const totalPrice = parseInt(totalPriceText.innerText);
+  console.log(totalPrice);
+  if (promoCode == "stevekaku") {
+    console.log("Love you stevkaku");
 
-//promo code
+    const totalCost = totalPrice * 0.2;
+    const updatedTotal = totalPrice - totalCost;
+    console.log(updatedTotal);
+    totalPriceText.innerText = updatedTotal;
+  } else {
+    alert("please input a valid promo code.");
+  }
+});
